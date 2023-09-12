@@ -1,4 +1,6 @@
+import { loadTSV, tsvToJsonString } from "@/lib/helpers/tsv_loader";
 import BingADCard from "./components/Image";
+import BingADMultiImgCard from "./components/MultiImageCard";
 
 
 // types for result from POST query
@@ -6,17 +8,6 @@ interface ImageResponse {
     imageb64: string[]; // Assuming that each element of the array is a base64 encoded string
 }
 
-// async function to send a query this handle http://gcrsandbox388:2023/process
-async function postQuery(query: string, use_gpt: boolean = true) {
-    const res = await fetch('http://gcrsandbox388:2023/process', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ query, use_gpt })
-    });
-    return await res.json();
-}
 
 // Get Bing images for floral prints
 async function getBingStaticImageData() {
@@ -25,15 +16,26 @@ async function getBingStaticImageData() {
     return await res.text();
 }
 
+// load local image data
+function getLocalImageData() {
+    const data = tsvToJsonString('data/ImageCreatorDataSelected.tsv');
+    return data;
+}
 
 export default async function ImagesPage() {
 
-    const { imageb64, prompt } = await postQuery("A person wearing a jacket with neomonde prints");
+    // const { imageb64, prompt } = await postQuery("A person wearing a jacket with neomonde prints");
+    const imageData = JSON.parse(getLocalImageData());
 
     return (
         <>
-            <div className="flex ">
-                <BingADCard imageString={imageb64[0]} title="Title" description={prompt} link="https://www.google.com" linkText="Link" />
+            <div className="flex flex-wrap items-center">
+                {imageData.map((image: any, index: number) => {
+                    // console.log(index);
+                    if (index < 30) return (
+
+                        <BingADMultiImgCard {...image} />)
+                })}
             </div>
         </>
     );
