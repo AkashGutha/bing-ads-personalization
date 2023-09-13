@@ -1,18 +1,25 @@
-'use server';
 
 // async function to send a query this handle http://gcrsandbox388:2023/process
-async function GetImageFromQuery(query: string, use_gpt: boolean = true) {
-    const res = await fetch('http://gcrsandbox388:2023/process', {
+export async function GetImageFromQuery(query: string, use_gpt: boolean = true) {
+    const res = await fetch('http://gcrsandbox388:2024/process', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ query, use_gpt })
+        body: JSON.stringify({ query, use_gpt }),
     });
-    return await res.json();
-}
 
-export async function getGeneratedImageForQuery(query: string) {
-    const { imageb64, prompt } = await GetImageFromQuery(query, true);
-    return { imageb64, prompt };
+    console.log("GetImageFromQuery: " + res.status);
+
+    // check for erorrs and print
+    if (!res.ok) {
+
+        console.log("Error in GetImageFromQuery");
+
+        const message = `An error has occured: ${res.status}`;
+        console.error(message);
+
+    }
+
+    return await res.json();
 }
