@@ -42,10 +42,10 @@ export default function DetailsPage() {
                     pathname: `/bing/images/search/details`,
                     query: { ...query, nav_type: "visual" }
                 }}>{"Visual search"}</Link>
-                <Link className="flex-none transition duration-300 ease-in border border-gray-300 border hover:border-gray-600 hover:bg-blue-100 rounded-md p-2 m-2" href={{
+                {/* <Link className="flex-none transition duration-300 ease-in border border-gray-300 border hover:border-gray-600 hover:bg-blue-100 rounded-md p-2 m-2" href={{
                     pathname: `/bing/images/search/details`,
                     query: { ...query, nav_type: "gpt text search" }
-                }}>{"GPT Text search"}</Link>
+                }}>{"GPT Text search"}</Link> */}
             </div>
 
             {(nav_type === "details") && (
@@ -57,7 +57,7 @@ export default function DetailsPage() {
 
             {(nav_type === "text") && (<>
                 <div className="flex flex-col items-center min-h-screen py-4">
-                    <iframe src={`https://www.bing.com/images/search?view=detailv2&FORM=OIIRPO&q=${encodeURIComponent(prompt as string)}`} className="w-full h-[1200px]"></iframe>
+                    <iframe src={`https://www.bing.com/images/search?q=${encodeURIComponent(prompt as string)}`} className="w-full h-[1200px]"></iframe>
                 </div>
             </>)}
 

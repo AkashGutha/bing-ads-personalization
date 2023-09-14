@@ -44,10 +44,10 @@ export default async function BingImagesSearchPage({
                 pathname: `/bing/images/search/details`,
                 query: { ...query, nav_type: "visual" }
             }}>{"Visual Search"}</Link>
-            <Link className="flex-none transition duration-300 ease-in border border-gray-300 border hover:border-gray-600 hover:bg-blue-100 rounded-md p-2 m-2" href={{
+            {/*<Link className="flex-none transition duration-300 ease-in border border-gray-300 border hover:border-gray-600 hover:bg-blue-100 rounded-md p-2 m-2" href={{
                 pathname: `/bing/images/search/details`,
                 query: { ...query, nav_type: "gpt text search" }
-            }}>{"GPT Text search"}</Link>
+            }}>{"GPT Text search"}</Link> */}
 
             <div className="flex flex-col items-center min-h-screen py-4">
                 <iframe src={`https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIIDP&sbisrc=UrlPaste&q=imgurl:${encodeURIComponent(imageurls[0] as string)}&idpbck=1&selectedindex=0`} className="w-full h-[1200px]"></iframe>
