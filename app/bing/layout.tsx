@@ -20,7 +20,7 @@ export default function BingLayout({ children }: {
                 {/* Header - Add a search bar with search button */}
                 <form className="flex flex-row items-center w-full max-w-screen-2xl" action={(formData: FormData) => {
                     const prompt = formData.get("search_query") as string;
-                    setSearchQueryHistory([...searchQueryHistory, prompt]);
+                    setSearchQueryHistory([prompt, ...searchQueryHistory]);
                     if (prompt) {
                         router.push(`/bing/images/search?prompt=${encodeURIComponent(prompt)}`);
                     }
